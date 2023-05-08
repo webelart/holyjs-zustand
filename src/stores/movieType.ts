@@ -6,4 +6,7 @@ type MovieTypeStore = {
     setMovieType: (val: MovieType | null) => void;
 };
 
-// export const useMovieType = create<MovieTypeStore>((set) => ());
+export const useMovieType = create<MovieTypeStore>((set) => ({
+    movieType: null,
+    setMovieType: (val: MovieType | null) => set({ movieType: val }),
+}));

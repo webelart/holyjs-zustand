@@ -1,28 +1,53 @@
-import { ShortMovie as ShortMovieType } from '@/types';
+import { useEffect, Fragment } from 'react';
+
+import { useMovies } from '@/stores/movies';
+import { useMovieType } from '@/stores/movieType';
 import Movie from '@/components/Movie';
 
-import movies from '@/data/movies.json';
-import { formatMovies } from '@/helpers/format-movies';
-
-const formattedMovies = formatMovies(movies);
-
 export default function Home() {
-  const movies: ShortMovieType[] = [...formattedMovies];
+  const [
+    status,
+    movies,
+    loadMovies,
+    isAllMoviesLoaded,
+  ] = useMovies(state => [
+    state.status,
+    state.movies,
+    state.loadMovies,
+    state.isAllMoviesLoaded
+  ]);
 
-  // if (status === 'error') {
-  //   return (
-  //       <p> Уппс... Ошибка. Перезагрузите страницу и попробуйте ещё раз 🤞🏻</p>
-  //   );
-  // }
+  const movieType = useMovieType(state => state.movieType);
+
+  useEffect(() => {
+    loadMovies(movieType, true);
+  }, [ movieType ]);
+
+  if (status === 'error') {
+    return (
+        <p className="mb-3">
+            Уппс... Ошибка. Перезагрузите страницу и попробуйте ещё раз 🤞🏻
+        </p>
+    )
+  }
 
   return (
-    <div className="movies">
-        {movies.map((item) => (
-            <Movie
-                key={item.id}
-                {...item}
-            />
-        ))}
-    </div>
+    <Fragment>
+      <div className="movies">
+          {movies.map((item) => (
+              <Movie
+                  key={item.id}
+                  {...item}
+              />
+          ))}
+      </div>
+      {!isAllMoviesLoaded() && (
+        <button
+          disabled={status === 'loading'}
+          className="button-load"
+          onClick={() => loadMovies(movieType)}
+        >Ещё фильмов</button>
+      )}
+    </Fragment>
   )
 }

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { useMovie } from '@/stores/movie';
 import movies from '@/data/movies.json';
 import { getTitleOfMovieType } from '@/helpers';
 import MovieCard from '@/components/Movie';
@@ -7,53 +8,24 @@ interface MovieProps {
     id: string;
 }
 
-const movie = {
-    id: 972742,
-    type: "movie",
-    name: "Девятая",
-    description: "Петербург конца XIX века охвачен массовым увлечением оккультными науками и эзотерикой. Британка-медиум Оливия Рид приезжает в столицу Российской империи с гастролями и собирает на своих публичных спиритических сеансах толпы людей. В это время в городе происходит серия загадочных убийств - изувеченные тела девушек находят в разных концах города. Расследованием занимаются молодой полковник полиции Ростов и его помощник Ганин. С каждой новой жертвой дело становится всё запутаннее. Ростов решает обратиться к Оливии в надежде, что её подлинная или мнимая способность вызывать духов погибших может помочь выйти на след убийцы.",
-    poster: {
-        url: "https://st.kp.yandex.net/images/film_big/972742.jpg",
-        previewUrl: "https://st.kp.yandex.net/images/film_iphone/iphone360_972742.jpg"
-    },
-    movieLength: 99,
-    year: 2019,
-    ageRating: 16,
-    countries: [
-        {
-            name: "Россия"
-        }
-    ],
-    genres: [
-        {
-            name: "детектив"
-        },
-        {
-            name: "триллер"
-        },
-        {
-            name: "криминал"
-        }
-    ],
-    similarMovies: [
-        {
-            id: 945391,
-            name: "Гоголь. Начало",
-            type: "movie",
-            poster: {
-                url: "https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/5ad7f814-8bb5-472c-b6f3-43fa75b65c46/orig",
-                previewUrl: "https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/5ad7f814-8bb5-472c-b6f3-43fa75b65c46/x1000"
-            }
-        }
-    ],
-    shortDescription: "Британка-медиум помогает ловить маньяка в Петербурге конца XIX века. Мистический детектив с Евгением Цыгановым"
-}
-
 const Movie: React.FC<MovieProps> = ({
     id
 }) => {
+	const [
+        status,
+        movie,
+        loadMovie,
+    ] = useMovie(state => [
+        state.status,
+        state.movie,
+        state.loadMovie,
+    ]);
 
-    if (!movie) {
+    useEffect(() => {
+        loadMovie(Number(id));
+    }, []);
+
+    if (!movie || status === 'loading') {
         return <p>Loading...</p>
     }
 

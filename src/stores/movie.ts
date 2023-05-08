@@ -8,4 +8,20 @@ interface MovieStore {
   loadMovie: (id: number) => void;
 };
 
-// export const useMovie = create<MovieStore>((set, get) => (}));
+export const useMovie = create<MovieStore>((set, get) => ({
+  movie: undefined,
+  status: 'default',
+  loadMovie: async (id) => {
+    set({ status: 'loading' });
+
+    try {
+      const data = await fetchRequest<GetMovieResponse>(`/api/movie?id=${id}`);
+      set({
+        status: 'success',
+        movie: data
+      });
+    } catch (err) {
+      set({ status: 'error' });
+    }
+  },
+}));

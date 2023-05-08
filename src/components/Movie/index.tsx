@@ -1,9 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { ShortMovie } from '@/types';
-
-import { useMovies } from '@/stores/movies';
 
 interface MovieProps extends ShortMovie {}
 

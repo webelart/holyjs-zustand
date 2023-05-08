@@ -14,6 +14,7 @@ const options = Object.values(optionsMap);
 const MovieTypeSelect = () => {
     return (
         <Select
+            instanceId={'react-select'}
             options={options}
             placeholder="Фильтр по типу фильма"
             isClearable

@@ -192,7 +192,7 @@ dd {
   display: flex;
   gap: 20px;
   margin-bottom: 30px;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 @media screen and (max-width: 650px) {

@@ -2,6 +2,8 @@
 
 [Документация Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction)
 
+В разных ветках вы можете шаги мастер-класса.
+
 ## Старт проекта
 
 Используйте следующие команды, предварительно не забудьте `npm install`

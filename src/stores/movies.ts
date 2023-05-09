@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { fetchRequest } from '@/helpers/fetch-request';
 import { persist, devtools } from 'zustand/middleware';
 
-interface MoviesStore {
+export interface MoviesStore {
   status: Status;
   loadedMovies: number;
   movies: ShortMovie[];
@@ -16,7 +16,7 @@ const LOAD_STEP = 6;
 
 export const useMovies = create<MoviesStore>()(
   devtools(
-      (set, get) => ({
+    (set, get) => ({
         movies: [],
         loadedMovies: 0,
         total: 0,

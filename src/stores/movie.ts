@@ -3,7 +3,7 @@ import { create } from 'zustand';
 import { fetchRequest } from '@/helpers/fetch-request';
 import { persist, devtools } from 'zustand/middleware';
 ;
-interface MovieStore {
+export interface MovieStore {
   movie?: Movie;
   status: Status;
   loadMovie: (id: number) => void;

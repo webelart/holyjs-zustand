@@ -1,6 +1,6 @@
 import { useEffect, Fragment } from 'react';
 
-import { useMovies } from '@/stores/movies';
+import { useMoviesStore } from '@/stores';
 import { useMovieType } from '@/stores/movieType';
 import Movie from '@/components/Movie';
 
@@ -10,7 +10,7 @@ export default function Home() {
     movies,
     loadMovies,
     isAllMoviesLoaded,
-  ] = useMovies(state => [
+  ] = useMoviesStore(state => [
     state.status,
     state.movies,
     state.loadMovies,

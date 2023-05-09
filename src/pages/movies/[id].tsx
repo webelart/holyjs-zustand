@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { useMovie } from '@/stores/movie';
+import { useMovieStore } from '@/stores';
 import movies from '@/data/movies.json';
 import { getTitleOfMovieType } from '@/helpers';
 import MovieCard from '@/components/Movie';
@@ -15,7 +15,7 @@ const Movie: React.FC<MovieProps> = ({
         status,
         movie,
         loadMovie,
-    ] = useMovie(state => [
+    ] = useMovieStore(state => [
         state.status,
         state.movie,
         state.loadMovie,

@@ -1,6 +1,6 @@
 import Select from 'react-select';
 import { MovieType } from '@/types';
-import { useMovieType } from '@/stores/movieType';
+import { useMovieTypeStore } from '@/stores/';
 
 type MovieOption = {
     [RegKey in MovieType]: { value: MovieType; label: string };
@@ -16,7 +16,7 @@ const MovieTypeSelect = () => {
     const [
         movieType,
         setMovieType
-    ] = useMovieType((state) => [
+    ] = useMovieTypeStore((state) => [
         state.movieType,
         state.setMovieType
     ]);

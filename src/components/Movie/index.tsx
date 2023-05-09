@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { ShortMovie } from '@/types';
 
+import { useMovieStore } from '@/stores';
+
 interface MovieProps extends ShortMovie {}
 
 const Movie: React.FC<MovieProps> = ({
@@ -20,7 +22,7 @@ const Movie: React.FC<MovieProps> = ({
                 {shortDescription && (<p>{shortDescription}</p>)}
             </div>
         </Link>
-    )
+    );
 }
 
 export default Movie;

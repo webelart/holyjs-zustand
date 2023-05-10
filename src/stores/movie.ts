@@ -1,7 +1,6 @@
 import { Movie, GetMovieResponse, Status } from '@/types';
-import { create } from 'zustand';
 import { fetchRequest } from '@/helpers/fetch-request';
-import { persist, devtools } from 'zustand/middleware';
+import { createStore } from './createStore';
 ;
 export interface MovieStore {
   movie?: Movie;
@@ -9,8 +8,7 @@ export interface MovieStore {
   loadMovie: (id: number) => void;
 };
 
-export const useMovie = create<MovieStore>()(
-  devtools(
+export const useMovie = createStore<MovieStore>(
     (set, _get) => ({
       movie: undefined,
       status: 'default',
@@ -28,5 +26,5 @@ export const useMovie = create<MovieStore>()(
         }
       },
     }),
-    { name: "Movie" }
-  ));
+    "Movie",
+);

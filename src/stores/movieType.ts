@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { MovieType } from '@/types';
 
-type MovieTypeStore = {
+interface MovieTypeStore {
     movieType: MovieType | null;
     setMovieType: (val: MovieType | null) => void;
 };
